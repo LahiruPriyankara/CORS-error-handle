@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>TestApp</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script>
+    $(document).ready(function () {      
+
+      $("#button_get").click(function (e) {
+
+        $.ajax({
+          url: 'http://localhost:8888/cors-config/test/get',
+          type: 'GET',
+          headers: { 'clientId': 'client-001' },
+          data: { 'id': '001'},
+          dataType: 'json',
+          success: function (data) {
+            //alert('Data: ' + data);
+            $("#span_1").text('SUCCESS. Data: ' + data);
+          },
+          error: function (request, error) {
+            //alert("Request: " + JSON.stringify(request));
+            $("#span_1").text("ERROR. Request: " + JSON.stringify(request));
+          }
+        });
+      });
+
+      $("#button_post").click(function (e) {
+        //alert("Text: " + $("#test").text());
+        $.ajax({
+          url: 'http://localhost:8888/cors-config/test/post',
+          type: 'POST',
+          headers: { 'clientIdd': 'client-001' },
+          data: { 'id': '001'},
+          dataType: 'json',
+          success: function (data) {
+            //alert('Data: ' + data);
+            $("#span_1").text('SUCCESS. Data: ' + data);
+          },
+          error: function (request, error) {
+            //alert("Request: " + JSON.stringify(request));
+            $("#span_1").text("ERROR. Request: " + JSON.stringify(request));
+          }
+        });
+      });
+
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <button id="button_get">Get-EndPoint</button>
+  <button id="button_post">Post-EndPoint</button>
+
+  <br>
+  <hr> <br>
+
+  <span id="span_1"></span>
+
+  <app-root></app-root>
+</body>
+
+</html>
